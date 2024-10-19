@@ -1,0 +1,103 @@
+.clock-center {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  background-color: red;
+  border: 2px solid black; /* Черный контур */
+  border-radius: 50%;
+  width: 10px; /* Размер точки */
+  height: 10px; /* Размер точки */
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.clock-face {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border: 2px solid black;
+  border-radius: 50%;
+  margin: 20px auto;
+  background-color: #ADD8E6;
+}
+
+.marking {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transform-origin: center;
+}
+
+.marking:before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 10px;
+  background: black;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Позиционирование отметок */
+.marking-one {transform: rotate(30deg);}
+.marking-two {transform: rotate(60deg);}
+.marking-three {transform: rotate(90deg);}
+.marking-four {transform: rotate(120deg);}
+.marking-five {transform: rotate(150deg);}
+.marking-six {transform: rotate(180deg);}
+.marking-seven {transform: rotate(210deg);}
+.marking-eight {transform: rotate(240deg);}
+.marking-nine {transform: rotate(270deg);}
+.marking-ten {transform: rotate(300deg);}
+.marking-eleven {transform: rotate(330deg);}
+.marking-twelve {transform: rotate(360deg);}
+
+.marking-one:after,
+.marking-two:after,
+.marking-three:after,
+.marking-four:after,
+.marking-five:after,
+.marking-six:after,
+.marking-seven:after,
+.marking-eight:after,
+.marking-nine:after,
+.marking-ten:after,
+.marking-eleven:after,
+.marking-twelve:after {
+  content: attr(data-hour);
+  position: absolute;
+  font-size: 20px;
+  font-family: 'Arial', sans-serif;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+}
+
+.hand {
+  position: absolute;
+  bottom: 50%; /* Центр циферблата */
+  left: 50%; /* Центр циферблата */
+  transform-origin: 50% 100%;
+  background: black;
+}
+
+.hour-hand {
+  width: 7px;
+  height: 60px; /* Длина часовой стрелки */
+  transform: rotate(90deg); /* Начальное положение */
+}
+
+.minute-hand {
+  width: 5px;
+  height: 80px; /* Длина минутной стрелки */
+  transform: rotate(180deg); /* Начальное положение */
+}
+
+.second-hand {
+  width: 3px;
+  height: 90px; /* Длина секундной стрелки */
+  transform: rotate(270deg); /* Начальное положение */
+  background: red; /* Для секундной стрелки обычно выбирают яркий цвет */
+}
