@@ -1,83 +1,103 @@
-:root {
-  --bg: #1e1e1e;
-  --text: #e0e0e0;
-  --input-bg: #2a2a2a;
-  --border: #444;
-  --btn-bg: #333;
+.clock-center {
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  background-color: red;
+  border: 2px solid black; /* Черный контур */
+  border-radius: 50%;
+  width: 10px; /* Размер точки */
+  height: 10px; /* Размер точки */
+  transform: translate(-50%, -50%);
+  z-index: 10;
 }
 
-body.light {
-  --bg: #f2f2f2;
-  --text: #111;
-  --input-bg: #fff;
-  --border: #ccc;
-  --btn-bg: #e0e0e0;
+.clock-face {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border: 2px solid black;
+  border-radius: 50%;
+  margin: 20px auto;
+  background-color: #ADD8E6;
 }
 
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: Arial, sans-serif;
-  padding: 10px;
-  width: 240px;
-}
-
-.theme-btn {
+.marking {
+  position: absolute;
   width: 100%;
-  height: 28px;
+  height: 100%;
+  text-align: center;
+  transform-origin: center;
 }
 
-.field {
-  margin-bottom: 14px;
+.marking:before {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 10px;
+  background: black;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-label {
-  font-size: 12px;
-  margin-bottom: 4px;
-  display: block;
+/* Позиционирование отметок */
+.marking-one {transform: rotate(30deg);}
+.marking-two {transform: rotate(60deg);}
+.marking-three {transform: rotate(90deg);}
+.marking-four {transform: rotate(120deg);}
+.marking-five {transform: rotate(150deg);}
+.marking-six {transform: rotate(180deg);}
+.marking-seven {transform: rotate(210deg);}
+.marking-eight {transform: rotate(240deg);}
+.marking-nine {transform: rotate(270deg);}
+.marking-ten {transform: rotate(300deg);}
+.marking-eleven {transform: rotate(330deg);}
+.marking-twelve {transform: rotate(360deg);}
+
+.marking-one:after,
+.marking-two:after,
+.marking-three:after,
+.marking-four:after,
+.marking-five:after,
+.marking-six:after,
+.marking-seven:after,
+.marking-eight:after,
+.marking-nine:after,
+.marking-ten:after,
+.marking-eleven:after,
+.marking-twelve:after {
+  content: attr(data-hour);
+  position: absolute;
+  font-size: 20px;
+  font-family: 'Arial', sans-serif;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
 }
 
-.row {
-  display: flex;
+.hand {
+  position: absolute;
+  bottom: 50%; /* Центр циферблата */
+  left: 50%; /* Центр циферблата */
+  transform-origin: 50% 100%;
+  background: black;
 }
 
-input {
-  flex: 1;
-  padding: 6px;
-  background: var(--input-bg);
-  color: var(--text);
-  border: 1px solid var(--border);
+.hour-hand {
+  width: 7px;
+  height: 60px; /* Длина часовой стрелки */
+  transform: rotate(90deg); /* Начальное положение */
 }
 
-button {
-  background-color: var(--btn-bg);
-  color: var(--text);
-  border: 1px solid var(--border);
-  cursor: pointer;
+.minute-hand {
+  width: 5px;
+  height: 80px; /* Длина минутной стрелки */
+  transform: rotate(180deg); /* Начальное положение */
 }
 
-button[data-copy] {
-  width: 32px;
-  min-width: 32px;
-  height: 32px;
-  padding: 0;
-  margin-left: 6px;
-
-  background: var(--btn-bg) url("copy.png") center / 16px no-repeat;
-  border: 1px solid var(--border);
-}
-
-button:hover {
-  filter: brightness(1.1);
-}
-
-.status {
-  font-size: 11px;
-  color: #4caf50;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-
-.status.show {
-  opacity: 1;
+.second-hand {
+  width: 3px;
+  height: 90px; /* Длина секундной стрелки */
+  transform: rotate(270deg); /* Начальное положение */
+  background: red; /* Для секундной стрелки обычно выбирают яркий цвет */
 }
