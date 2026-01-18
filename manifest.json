@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "Часы",
+  "name": "Password keeper",
   "version": "2.0",
   "action": {
-    "default_popup": "clock.html",
+    "default_popup": "password.html",
     "default_icon": "icon.png"
   },
   "permissions": []

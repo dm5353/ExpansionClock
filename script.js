@@ -1,21 +1,59 @@
-function updateClock() {
-  var now = new Date();
-  var seconds = now.getSeconds();
-  var minutes = now.getMinutes();
-  var hours = now.getHours();
+const login = document.getElementById("login");
+const password = document.getElementById("password");
+const themeBtn = document.getElementById("themeToggle");
+const statuses = document.querySelectorAll(".status");
 
-  var secondsAngle = seconds * 6; // Полный круг 360 градусов, 60 секунд
-  var minutesAngle = minutes * 6 + seconds * 0.1; // Добавляем плавность
-  var hoursAngle = (hours % 12) * 30 + minutes * 0.5; // 12 часов, 30 градусов на час
+/* ---------- загрузка сохранённых данных ---------- */
+login.value = localStorage.getItem("login") || "";
+password.value = localStorage.getItem("password") || "";
 
-  var hourHand = document.querySelector('.hour-hand');
-  var minuteHand = document.querySelector('.minute-hand');
-  var secondHand = document.querySelector('.second-hand');
-
-  hourHand.style.transform = `rotate(${hoursAngle}deg)`;
-  minuteHand.style.transform = `rotate(${minutesAngle}deg)`;
-  secondHand.style.transform = `rotate(${secondsAngle}deg)`;
+if (localStorage.getItem("theme") === "light") {
+  document.body.classList.add("light");
 }
 
-setInterval(updateClock, 1000);
-updateClock();
+/* ---------- сохранение при изменении ---------- */
+login.addEventListener("input", () =>
+  localStorage.setItem("login", login.value)
+);
+
+password.addEventListener("input", () =>
+  localStorage.setItem("password", password.value)
+);
+
+/* ---------- копирование + автосброс ---------- */
+document.querySelectorAll("button[data-copy]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    statuses.forEach(s => s.classList.remove("show"));
+
+    const id = btn.dataset.copy;
+    const value = document.getElementById(id).value;
+    const status = document.getElementById("status-" + id);
+
+    navigator.clipboard.writeText(value).then(() => {
+      status.classList.add("show");
+    });
+  });
+});
+
+/* ---------- тема ---------- */
+function updateThemeIcon() {
+  themeBtn.textContent =
+    document.body.classList.contains("light") ? "☀️" : "🌙";
+}
+
+/* загрузка темы */
+if (localStorage.getItem("theme") === "light") {
+  document.body.classList.add("light");
+}
+updateThemeIcon();
+
+/* переключение */
+themeBtn.addEventListener("click", () => {
+  document.body.classList.toggle("light");
+  localStorage.setItem(
+    "theme",
+    document.body.classList.contains("light") ? "light" : "dark"
+  );
+  updateThemeIcon();
+});
+
